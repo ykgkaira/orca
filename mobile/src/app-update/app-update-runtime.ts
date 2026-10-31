@@ -10,15 +10,26 @@ import {
 import { appStoreUpdateSource } from './app-store-update-source'
 import { createAppUpdateChecker, type AppUpdateState } from './app-update-checker'
 import type { AppUpdateSource } from './app-update-source'
-import { githubReleaseUpdateSource } from './github-release-update-source'
+import {
+  createGithubReleaseUpdateSource,
+  githubReleaseUpdateSource,
+  type GithubReleaseChannel
+} from './github-release-update-source'
 
 // expoConfig is embedded binary manifest because app does not use expo-updates; SDK 55 removed nativeAppVersion. Revisit version source if adopting OTA updates.
 export const installedAppVersion: string | null = Constants.expoConfig?.version ?? null
 
+// Forca: app.config.js sets extra.forcaUpdateChannel in a Forca build. A Forca APK must not offer the official Orca APK.
+const forcaUpdateChannel = Constants.expoConfig?.extra?.forcaUpdateChannel as
+  | GithubReleaseChannel
+  | undefined
+
 /** The channel that installed this binary. */
 function resolveAppUpdateSource(): AppUpdateSource | null {
   if (Platform.OS === 'android') {
-    return githubReleaseUpdateSource
+    return forcaUpdateChannel
+      ? createGithubReleaseUpdateSource((input, init) => fetch(input, init), forcaUpdateChannel)
+      : githubReleaseUpdateSource
   }
   if (Platform.OS === 'ios') {
     return appStoreUpdateSource

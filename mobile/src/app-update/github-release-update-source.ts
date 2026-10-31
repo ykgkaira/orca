@@ -19,8 +19,8 @@ const installableReleaseSchema = z.looseObject({
 })
 
 /** Versions named by the tag refs GitHub returns for the mobile-android prefix. */
-export function parseMobileAndroidTagVersions(refs: unknown): string[] {
-  const prefix = `refs/tags/${TAG_PREFIX}`
+export function parseMobileAndroidTagVersions(refs: unknown, tagPrefix = TAG_PREFIX): string[] {
+  const prefix = `refs/tags/${tagPrefix}`
   return tagRefsSchema
     .parse(refs)
     .filter(({ ref }) => ref.startsWith(prefix))
@@ -35,22 +35,29 @@ export function installableReleaseUrl(release: unknown): string | null {
     : null
 }
 
-export function createGithubReleaseUpdateSource(fetchImpl: Fetch): AppUpdateSource {
+/** Forca: a fork build reads its releases from its own repository and tag prefix. */
+export type GithubReleaseChannel = { repoApi: string; tagPrefix: string }
+
+export function createGithubReleaseUpdateSource(
+  fetchImpl: Fetch,
+  channel: GithubReleaseChannel = { repoApi: REPO_API, tagPrefix: TAG_PREFIX }
+): AppUpdateSource {
+  const { repoApi, tagPrefix } = channel
   return {
     async check(installedVersion, signal): Promise<AppUpdateCheckResult> {
-      const refsReply = await fetchImpl(`${REPO_API}/git/matching-refs/tags/${TAG_PREFIX}`, {
+      const refsReply = await fetchImpl(`${repoApi}/git/matching-refs/tags/${tagPrefix}`, {
         signal
       })
       if (!refsReply.ok) {
         throw new Error(`tag refs HTTP ${refsReply.status}`)
       }
-      const candidates = parseMobileAndroidTagVersions(await refsReply.json())
+      const candidates = parseMobileAndroidTagVersions(await refsReply.json(), tagPrefix)
         .filter((version) => isNewerReleaseVersion(version, installedVersion))
         .sort((left, right) => compareAppVersions(right, left))
         .slice(0, MAX_RELEASE_PROBES)
       for (const version of candidates) {
         const releaseReply = await fetchImpl(
-          `${REPO_API}/releases/tags/${encodeURIComponent(`${TAG_PREFIX}${version}`)}`,
+          `${repoApi}/releases/tags/${encodeURIComponent(`${tagPrefix}${version}`)}`,
           { signal }
         )
         if (releaseReply.status === 404) {
