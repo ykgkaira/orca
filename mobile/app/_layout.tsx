@@ -221,6 +221,9 @@ export default function RootLayout() {
               <Stack.Screen name="connection-log" options={{ headerShown: false }} />
               <Stack.Screen name="about" options={{ headerShown: false }} />
               <Stack.Screen name="h" options={{ headerShown: false }} />
+              {/* Forca: the inbox, and the host list that a Forca build moves off the start screen. */}
+              <Stack.Screen name="inbox" options={{ headerShown: false }} />
+              <Stack.Screen name="hosts" options={{ headerShown: false }} />
               <Stack.Screen
                 name="new-workspace"
                 options={{
