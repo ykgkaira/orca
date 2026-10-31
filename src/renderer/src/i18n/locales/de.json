@@ -13168,6 +13168,10 @@
           "assignedLight": "{{value0}} als helles Design festgelegt",
           "assignedDark": "{{value0}} als dunkles Design festgelegt",
           "saveFailed": "Das Design konnte nicht gespeichert werden. Versuche es erneut."
+        },
+        "pluginContributions": {
+          "editorReplacesViewer": "Öffnet {{value0}} anstelle des Orca-Viewers",
+          "editorMayReplaceViewer": "Öffnet möglicherweise {{value0}} anstelle des Orca-Viewers"
         }
       },
       "right": {
@@ -15972,7 +15976,10 @@
           "be27304574": "Verkleinern",
           "77bfc9b35a": "Bild in separatem Fenster öffnen",
           "3ef9551ba2": "Vorschau wird geladen…",
-          "d9d2944855": "Dateivorschau konnte nicht geladen werden"
+          "d9d2944855": "Dateivorschau konnte nicht geladen werden",
+          "fitToView": "An Ansicht anpassen",
+          "actualSize": "Originalgröße",
+          "expand": "Bild vergrößert anzeigen"
         },
         "ImageViewerPopup": {
           "0ef78475e7": "Zum Schließen Esc drücken",

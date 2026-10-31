@@ -13154,6 +13154,10 @@
           "assignedLight": "{{value0}} açık temanız olarak ayarlandı",
           "assignedDark": "{{value0}} koyu temanız olarak ayarlandı",
           "saveFailed": "Tema kaydedilemedi. Yeniden deneyin."
+        },
+        "pluginContributions": {
+          "editorReplacesViewer": "{{value0}} dosyalarını Orca görüntüleyicisi yerine açar",
+          "editorMayReplaceViewer": "{{value0}} dosyalarını Orca görüntüleyicisi yerine açabilir"
         }
       },
       "right": {
@@ -15958,7 +15962,10 @@
           "be27304574": "Uzaklaştır",
           "77bfc9b35a": "Görseli pop-up'ta aç",
           "3ef9551ba2": "Önizleme yükleniyor...",
-          "d9d2944855": "Dosya önizlemesi yüklenemedi"
+          "d9d2944855": "Dosya önizlemesi yüklenemedi",
+          "fitToView": "Görünüme sığdır",
+          "actualSize": "Gerçek boyut",
+          "expand": "Görseli büyüt"
         },
         "ImageViewerPopup": {
           "0ef78475e7": "Kapatmak için Esc tuşuna basın",

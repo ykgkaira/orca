@@ -13077,7 +13077,9 @@
           "dark": "Sombre",
           "light": "Clair",
           "languageIncomplete": "Traduit à {{value0}} %, trop incomplet pour servir de langue à Orca",
-          "languageCoverage": "Langue de l’interface · traduite à {{value0}} %"
+          "languageCoverage": "Langue de l’interface · traduite à {{value0}} %",
+          "editorReplacesViewer": "Ouvre {{value0}} à la place de la visionneuse d’Orca",
+          "editorMayReplaceViewer": "Peut ouvrir {{value0}} à la place de la visionneuse d’Orca"
         },
         "PluginInstallConsent": {
           "noOtherAccess": "Aucun autre accès",
@@ -16056,7 +16058,10 @@
           "be27304574": "Zoom arrière",
           "77bfc9b35a": "Ouvrir l'image dans une fenêtre indépendante",
           "3ef9551ba2": "Chargement de l'aperçu...",
-          "d9d2944855": "Échec du chargement de l'aperçu du fichier"
+          "d9d2944855": "Échec du chargement de l'aperçu du fichier",
+          "fitToView": "Ajuster à la vue",
+          "actualSize": "Taille réelle",
+          "expand": "Agrandir l’image"
         },
         "ImageViewerPopup": {
           "0ef78475e7": "Appuyez sur Échap pour fermer",

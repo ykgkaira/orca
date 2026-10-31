@@ -9487,6 +9487,10 @@
           "manyDescription": "Não serão atualizadas até você revisá-las.",
           "review": "Revisar",
           "dismiss": "Dispensar"
+        },
+        "pluginContributions": {
+          "editorReplacesViewer": "Abre {{value0}} em vez do visualizador do Orca",
+          "editorMayReplaceViewer": "Pode abrir {{value0}} em vez do visualizador do Orca"
         }
       },
       "right": {
@@ -13079,7 +13083,10 @@
           "be27304574": "Diminuir zoom",
           "77bfc9b35a": "Abrir imagem em popup",
           "3ef9551ba2": "Carregando pré-visualização...",
-          "d9d2944855": "Falha ao carregar a pré-visualização do arquivo"
+          "d9d2944855": "Falha ao carregar a pré-visualização do arquivo",
+          "fitToView": "Ajustar à visualização",
+          "actualSize": "Tamanho real",
+          "expand": "Expandir imagem"
         },
         "MarkdownTemplatePicker": {
           "22cd94426f": "sem-titulo.md",
