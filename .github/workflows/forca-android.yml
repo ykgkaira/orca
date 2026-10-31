@@ -70,9 +70,14 @@ jobs:
           apks=(android/app/build/outputs/apk/release/*.apk)
           [ "${#apks[@]}" -eq 1 ] || { echo "Expected one release APK, found ${#apks[@]}" >&2; exit 1; }
           out="$RUNNER_TEMP/forca-${FORCA_VERSION}.apk"
-          "$apksigner" sign --ks "$keystore" --ks-type PKCS12 \
-            --ks-pass env:FORCA_KEYSTORE_PASSWORD --out "$out" "${apks[0]}"
-          "$apksigner" verify --print-certs "$out" | grep -c "Signer #1" >/dev/null
+          echo "apksigner: $apksigner"
+          echo "keystore bytes: $(wc -c < "$keystore")"
+          echo "input APK: ${apks[0]}"
+          "$apksigner" sign --verbose --ks "$keystore" --ks-type PKCS12 --ks-key-alias forca \
+            --ks-pass env:FORCA_KEYSTORE_PASSWORD --key-pass env:FORCA_KEYSTORE_PASSWORD \
+            --out "$out" "${apks[0]}" 2>&1
+          "$apksigner" verify --print-certs "$out" 2>&1 | grep -E "Signer|DN" || true
+          "$apksigner" verify "$out"
           rm -f "$keystore"
           sha256="$(sha256sum "$out" | cut -d ' ' -f 1)"
           printf '%s *%s\n' "$sha256" "$(basename "$out")" > "$out.sha256"
